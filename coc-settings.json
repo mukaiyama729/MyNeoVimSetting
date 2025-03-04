@@ -1,0 +1,62 @@
+{
+  "languageserver": {
+    "rust": {
+      "command": "rust-analyzer",
+      "filetypes": ["rust"],
+      "rootPatterns": ["Cargo.toml", "rust-project.json", ".git"],
+      "settings": {
+        "rust-analyzer": {
+          "checkOnSave": {
+            "command": "clippy"
+          },
+          "diagnostics": {
+            "disabled": ["unresolved-proc-macro"]
+          },
+          "inlayHints": {
+            "enable": true,
+            "typeHints": {
+              "enable": true
+            },
+            "parameterHints": {
+              "enable": true
+            }
+          },
+          "cargo": {
+            "features": "all"
+          },
+          "procMacro": {
+            "enable": true
+          }
+        }
+      }
+    }
+  },
+  "coc.preferences.formatOnSave": true,
+  "eslint.autoFixOnSave": true,
+  "eslint.enable": true,
+  "prettier.singleQuote": true,
+  "prettier.tabWidth": 2,
+  "prettier.useTabs": false,
+  "prettier.trailingComma": "all",
+  "prettier.arrowParens": "always",
+  "prettier.bracketSpacing": true,
+  "prettier.enable": true,
+  "suggest.autoTrigger": "always",
+  "suggest.noselect": true,
+  "diagnostic.refreshOnInsertMode": true,
+  "tsserver.log": "verbose",
+  "tsserver.maxTsServerMemory": 8096,
+  "typescript.suggest.enabled": true,
+  "typescript.format.enable": true,
+  "typescript.preferences.importModuleSpecifier": "non-relative",
+  "typescript.preferences.importModuleSpecifierEnding": "auto",
+  "typescript.preferences.includePackageJsonAutoImports": "auto",
+  "typescript.preferences.jsxAttributeCompletionStyle": "braces",
+  "typescript.preferences.useAliasesForRenames": true,
+  "snippets.ultisnips.pythonPrompt": false,
+  "pylsp.builtin.enableInstallPylspMypy": true,
+  "pylsp.builtin.enableInstallPylsIsort": true,
+  "pylsp.builtin.enableInstallPythonLspBlack": true,
+  "pylsp.builtin.enableInstallPylspRope": true,
+  "pylsp.builtin.enableInstallPythonLspRuff": true
+}
