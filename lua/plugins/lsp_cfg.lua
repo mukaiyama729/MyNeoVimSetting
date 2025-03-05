@@ -29,19 +29,19 @@ local diagnostics = {
 }
 
 local function get_python_path(workspace)
-  -- 1. `venv` ディレクトリがあれば、その `python` を使う
+  -- `venv` ディレクトリがあれば、その `python` を使う
   if vim.fn.glob(workspace .. "/venv/bin/python") ~= "" then
     return workspace .. "/venv/bin/python"
   end
-  -- 2. `.venv` ディレクトリがあれば、その `python` を使う
+  -- `.venv` ディレクトリがあれば、その `python` を使う
   if vim.fn.glob(workspace .. "/.venv/bin/python") ~= "" then
     return workspace .. "/.venv/bin/python"
   end
-  -- 3. Conda の場合
+  -- Conda の場合
   if vim.fn.getenv("CONDA_PREFIX") ~= vim.NIL then
     return vim.fn.getenv("CONDA_PREFIX") .. "/bin/python"
   end
-  -- 4. システムの Python をデフォルトにする
+  -- システムの Python をデフォルトにする
   return "python"
 end
 
@@ -52,7 +52,7 @@ return {
     event = "InsertEnter",
   },
 
-  -- Mason + LSP
+  -- Mason + LSP: MasonはLSPのパッケージを管理するためのツール
   {
     "williamboman/mason.nvim",
     dependencies = {
@@ -162,10 +162,6 @@ return {
         }),
       }
 
-      local eslint_diagnostics_sources = {
-        null_ls.builtins.diagnostics.eslint_d,
-      }
-
       -- Python以外のフォーマッタ
       local other_formatting_sources = {
         null_ls.builtins.formatting.stylua,         -- Lua
@@ -180,7 +176,6 @@ return {
         null_ls.builtins.diagnostics.yamllint, -- YAML
         null_ls.builtins.diagnostics.selene, -- Lua
         null_ls.builtins.diagnostics.semgrep, -- typescript
-        null_ls.builtins.diagnostics.eslint_d, -- JS/TS/HTML/CSS など
         -- 必要に応じて他の診断ツールを追加
       }
 

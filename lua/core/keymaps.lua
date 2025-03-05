@@ -20,6 +20,23 @@ map("n", "<C-t>", ":Neotree left toggle<CR>", opts)
 map("n", "<C-j>", "5j", opts)
 map("n", "<C-k>", "5k", opts)
 
+-- バッファ複製
+local function duplicate_vsplit()
+  local buf = vim.api.nvim_get_current_buf()
+  vim.cmd("vsplit")
+  vim.api.nvim_win_set_buf(0, buf)
+end
+
+local function duplicate_hsplit()
+  local buf = vim.api.nvim_get_current_buf()
+  vim.cmd("split")
+  vim.api.nvim_win_set_buf(0, buf)
+end
+
+-- キーマップを設定
+vim.keymap.set("n", "<leader>vs", duplicate_vsplit, { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>hs", duplicate_hsplit, { noremap = true, silent = true })
+
 -- 空行を挿入
 map("n", "<leader>k", "O<Esc>", opts)
 map("n", "<leader>j", "o<Esc>", opts)
@@ -61,6 +78,16 @@ vim.keymap.set("n", "<leader>la", "<cmd>Lspsaga code_action<cr>", ex_opts("Lspsa
 -- neotree diagnostic
 vim.keymap.set("n", "<leader>nd", ":Neotree diagnostics reveal bottom<CR>", ex_opts("Open diagnostic bottom"))
 
+-- toggleterm
+local Terminal = require("toggleterm.terminal").Terminal
+local lazygit = Terminal:new({ cmd = "lazygit", hidden = true })
+
+function _lazygit_toggle()
+  lazygit:toggle()
+end
+
+vim.api.nvim_set_keymap("n", "<leader>g", "<cmd>lua _lazygit_toggle()<CR>", { noremap = true, silent = true })
+
 -- インサートモードの括弧の自動補完
 vim.keymap.set("i", "(", "()<Left>")
 vim.keymap.set("i", "[", "[]<Left>")
@@ -76,3 +103,10 @@ vim.keymap.set("i", "<C-u>", "<C-o>d0", opts)
 vim.keymap.set("i", "<C-w>", "<C-o>dB", opts)
 vim.keymap.set("i", "<C-i>", "<Esc>O", opts)
 vim.keymap.set("i", "<C-o>", "<Esc>o", opts)
+
+--ターミナルモード
+vim.keymap.set("t", "<leader><Esc>", "<C-\\><C-n>", opts)
+
+--ビジュアルモード
+vim.keymap.set("v", "<C-k>", "5k", opts)
+vim.keymap.set("v", "<C-j>", "5j", opts)
