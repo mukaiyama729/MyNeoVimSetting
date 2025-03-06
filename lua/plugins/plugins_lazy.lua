@@ -1,5 +1,6 @@
 return {
-  { "folke/todo-comments.nvim",    opts = {} },
+  { "folke/neodev.nvim",        opts = {} },
+  { "folke/todo-comments.nvim", opts = {} },
   -- colorscheme
   {
     "catppuccin/nvim",

@@ -36,4 +36,6 @@ require("lazy").setup(plugins, opts)
 require("core.options")
 require("core.autocmds")
 require("core.keymaps")
+
 require("user.ui")
+require("original.my-toggle.toggle-comment").setup()

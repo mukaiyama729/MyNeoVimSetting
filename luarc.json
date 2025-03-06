@@ -1,6 +1,10 @@
 {
-  "diagnostics": {
+  "Lua.diagnostics": {
     "globals": ["vim"],
-    "hint.enable": false
+    "disable": [],
+    "enable": true
+  },
+  "Lua.hint": {
+    "enable": true
   }
 }
