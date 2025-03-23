@@ -90,11 +90,38 @@ return {
           goto continue
         end
 
-        if lsp_server == "ts_ls" then
+        if lsp_server == "ts_ls" or lsp_server == "typescript-language-server" then
           lspconfig[lsp_server].setup({
+            init_options = { hostInfo = "neovim" },
+            cmd = { "typescript-language-server", "--stdio" },
             root_dir = function(fname)
               return lspconfig.util.find_git_ancestor(fname) or vim.fn.getcwd()
             end,
+            filetypes = {
+              "javascript",
+              "javascriptreact",
+              "javascript.jsx",
+              "typescript",
+              "typescriptreact",
+              "typescript.tsx",
+            },
+            single_file_support = true,
+          })
+          goto continue
+        end
+
+        if lsp_server == "jdtls" then
+          local home = os.getenv("HOME")
+          local project_name = vim.fn.fnamemodify(vim.fn.getcwd(), ":t")
+          local workspace_dir = home .. "/.cache/jdtls/workspace/" .. project_name
+          lspconfig[lsp_server].setup({
+            cmd = { "jdtls" },
+            --cmd = {
+            --  home .. "/.local/share/nvim/mason/bin/jdtls",
+            --  "-data",
+            --  workspace_dir,
+            --},
+            --root_dir = vim.fs.dirname(vim.fs.find({ "gradlew", ".git" }, { upward = true })[1]),
           })
           goto continue
         end
@@ -187,7 +214,16 @@ return {
           null_ls.builtins.formatting.stylua,
           null_ls.builtins.completion.spell,
           null_ls.builtins.formatting.stylua, -- Lua
-          null_ls.builtins.formatting.prettier, -- JS/TS/HTML/CSS など
+          null_ls.builtins.formatting.prettier.with({
+            filetypes = {
+              "html",
+              "css",
+              "javascript",
+              "typescript",
+              "javascriptreact",
+              "typescriptreact",
+            },
+          }),                            -- JS/TS/HTML/CSS など
           null_ls.builtins.formatting.shfmt, -- Shell Script
           null_ls.builtins.formatting.djlint, -- Django Templates
           null_ls.builtins.formatting.google_java_format,
@@ -205,6 +241,7 @@ return {
           "*.lua",
           "*.js",
           "*.ts",
+          "*.tsx",
           "*.html",
           "*.css",
           "*.yaml",

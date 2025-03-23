@@ -107,8 +107,12 @@ vim.api.nvim_create_autocmd("BufWritePost", {
 
     -- ファイルごとに診断をセット
     for bufnr, diags in pairs(diag_by_file) do
-      vim.notify("Set diagnostics for " .. bufnr, vim.log.levels.INFO)
       vim.diagnostic.set(tsc_ns, bufnr, diags)
     end
   end,
+})
+
+vim.api.nvim_create_autocmd("VimLeave", {
+  pattern = "*",
+  command = "set guicursor=a:ver20",
 })

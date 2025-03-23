@@ -74,6 +74,7 @@ vim.keymap.set("n", "<leader>lh", "<cmd>Lspsaga hover_doc<cr>", ex_opts("Lspsaga
 vim.keymap.set("n", "<leader>lo", "<cmd>Lspsaga outline<cr>", ex_opts("Lspsaga Outline"))
 vim.keymap.set("n", "<leader>lr", "<cmd>Lspsaga rename<cr>", ex_opts("Lspsaga Rename"))
 vim.keymap.set("n", "<leader>la", "<cmd>Lspsaga code_action<cr>", ex_opts("Lspsaga Code Action"))
+vim.keymap.set("n", "<leader>lp", "<cmd>Lspsaga peek_definition<cr>", ex_opts("Lspsaga Peek Definition"))
 
 -- neotree diagnostic
 vim.keymap.set("n", "<leader>nd", ":Neotree diagnostics reveal bottom<CR>", ex_opts("Open diagnostic bottom"))
@@ -86,7 +87,13 @@ function _lazygit_toggle()
   lazygit:toggle()
 end
 
+local htopgit = Terminal:new({ cmd = "htop", hidden = true })
+function _htop_toggle()
+  htopgit:toggle()
+end
+
 vim.api.nvim_set_keymap("n", "<leader>g", "<cmd>lua _lazygit_toggle()<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<leader>h", "<cmd>lua _htop_toggle()<CR>", { noremap = true, silent = true })
 
 -- インサートモードの括弧の自動補完
 vim.keymap.set("i", "(", "()<Left>")

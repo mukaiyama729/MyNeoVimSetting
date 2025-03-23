@@ -26,7 +26,12 @@ local opts = {
   log = { level = "info" },
 }
 
--- leader キーの設定 ﾜﾃｸｼはspaceにしてる
+-- init.lua の冒頭または LSP 設定ファイルの先頭に追加
+vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
+  update_in_insert = false, -- 挿入モード中は更新しない
+})
+
+-- leader キーの設定 自分 はspaceにしてる
 vim.g.mapleader = " "
 
 -- lazyを setupするため

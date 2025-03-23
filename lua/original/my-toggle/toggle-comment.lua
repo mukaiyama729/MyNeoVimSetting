@@ -9,7 +9,7 @@ local M = {}
 M.config = {
   enable = true,
   auto_save_timers = {},
-  save_time_span = 60000,
+  save_time_span = 720000,
 }
 
 M.setup = function(opts)
@@ -47,7 +47,6 @@ end
 
 M.get_ext = function()
   local file_name = vim.api.nvim_buf_get_name(0)
-
   local ext = file_name:match("^.+%.(.+)$")
   return ext
 end
@@ -73,6 +72,7 @@ end
 
 M.toggle_auto_save = function()
   local current_buf_num = vim.api.nvim_get_current_buf()
+
   if M.config.auto_save_timers[current_buf_num] ~= nil then
     return
   end

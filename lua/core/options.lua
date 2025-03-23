@@ -71,8 +71,11 @@ vim.opt.laststatus = 3
 vim.cmd("syntax enable")
 
 -- カラースキームを 'slate' に設定
--- 1vim.cmd("colorscheme tokyonight")
-vim.cmd.colorscheme("catppuccin-macchiato")
+vim.cmd("colorscheme tokyonight")
+-- vim.cmd.colorscheme("catppuccin-macchiato")
 -- vim.cmd.colorscheme("tokyonight-storm")
+--vim.cmd("colorscheme onedark")
 -- 折り返しなし
 vim.opt.wrap = false
+
+vim.lsp.set_log_level("WARN")

@@ -1,4 +1,25 @@
 return {
+  {
+    "olimorris/onedarkpro.nvim",
+    priority = 1000, -- Ensure it loads first
+    opts = {
+      styles = {
+        types = "NONE",
+        methods = "NONE",
+        numbers = "NONE",
+        strings = "NONE",
+        comments = "italic",
+        keywords = "bold,italic",
+        constants = "NONE",
+        functions = "italic",
+        operators = "NONE",
+        variables = "NONE",
+        parameters = "NONE",
+        conditionals = "italic",
+        virtual_text = "NONE",
+      },
+    },
+  },
   { "folke/neodev.nvim",        opts = {} },
   { "folke/todo-comments.nvim", opts = {} },
   -- colorscheme
@@ -13,7 +34,13 @@ return {
     "folke/tokyonight.nvim",
     lazy = false,
     priority = 1000,
-    opts = {},
+    opts = {
+      transparent = true,
+      styles = {
+        sidebars = "transparent",
+        floats = "transparent",
+      },
+    },
   },
   -- file browser
   { "nvim-tree/nvim-web-devicons", opts = {} },
@@ -35,6 +62,11 @@ return {
           ["s"] = "open_vsplit",
           [">"] = "next_source",
           ["<"] = "prev_source",
+          ["P"] = { "toggle_preview", config = { use_float = true, use_image_nvim = true } },
+          ["<space>"] = {
+            "toggle_node",
+            nowait = false, -- disable `nowait` if you have existing combos starting with this char that you want to use
+          },
         },
         fuzzy_finder_mappings = {
           ["<down>"] = "move_cursor_down",
@@ -122,11 +154,16 @@ return {
     event = "BufRead",
   },
   -- nvim-treesitter
+  -- treesitterは高度な構文ハイライトを行うためのプラグイン
   {
     "nvim-treesitter/nvim-treesitter",
+    dependencies = {
+      "windwp/nvim-ts-autotag",
+    },
     event = { "BufRead", "BufNewFile", "InsertEnter" },
     build = ":TSUpdate",
     config = function()
+      require("nvim-ts-autotag").setup()
       local configs = require("nvim-treesitter.configs")
       configs.setup({
         ensure_installed = {
@@ -161,8 +198,31 @@ return {
         auto_install = true,
         highlight = { enable = true },
         indent = { enable = true },
+        ignore_install = { "javascript" },
       })
     end,
+  },
+  --   {
+  --     "nvim-ts-autotag",
+  --     event = "BufReadPre",
+  --     opts = {
+  --       opts = {
+  --         -- Defaults
+  --         enable_close = true,       -- Auto close tags
+  --         enable_rename = true,      -- Auto rename pairs of tags
+  --         enable_close_on_slash = false, -- Auto close on trailing </
+  --       },
+  --       -- Also override individual filetype configs, these take priority.
+  --       -- Empty by default, useful if one of the "opts" global settings
+  --       -- doesn't work well in a specific filetype
+  --     },
+  --   },
+  {
+    "windwp/nvim-autopairs",
+    event = "InsertEnter",
+    config = true,
+    -- use opts = {} for passing setup options
+    -- this is equivalent to setup({}) function
   },
   -- noice
   {
@@ -173,6 +233,9 @@ return {
       "rcarriga/nvim-notify",
     },
     opts = {
+      notify = {
+        view = "mini",
+      },
 
       cmdline = {
         enabled = true,     -- enables the Noice cmdline UI
@@ -198,6 +261,15 @@ return {
       routes = {
         {
           filter = { event = "msg_show", find = "E486: Pattern not found: .*" },
+          opts = { skip = true },
+        },
+        {
+          filter = { event = "msg_show", kind = "", find = "書込み$" },
+          opts = { skip = true },
+        },
+
+        {
+          filter = { event = "msg_show", kind = "", find = "written$" },
           opts = { skip = true },
         },
       },
