@@ -6,17 +6,26 @@ return {
   opts = {
     -- add any opts here
     -- for example
-    provider = "openai",
-    auto_suggestions_provider = "openai",
+    provider = "gemini",
+    auto_suggestions_provider = "gemini",
 
     openai = {
       endpoint = "https://api.openai.com/v1",
-      model = "gpt-4o-mini", -- your desired model (or use gpt-4o, etc.)
-      timeout = 50000,    -- timeout in milliseconds
-      temperature = 0,    -- adjust if needed
+      model = "gpt-4o", -- your desired model (or use gpt-4o, etc.)
+      timeout = 50000000, -- timeout in milliseconds
+      temperature = 0, -- adjust if needed
       max_tokens = 4096,
       -- reasoning_effort = "high" -- only supported for reasoning models (o1, etc.)
     },
+    gemini = {
+      endpoint = "https://generativelanguage.googleapis.com/v1beta/models",
+      model = "gemini-2.5-pro-exp-03-25", --"gemini-2.0-flash-thinking-exp-01-21", -- your desired model (or use gpt-4o, etc.)
+      timeout = 50000,                 -- timeout in milliseconds
+      temperature = 0,                 -- adjust if needed
+      max_tokens = 4096,
+      -- reasoning_effort = "high" -- only supported for reasoning models (o1, etc.)
+    },
+
     behaviour = {
       auto_suggestions = false, -- Experimental stage
       auto_set_highlight_group = true,
@@ -110,6 +119,7 @@ return {
   },
   -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
   build = "make",
+
   -- build = "powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false" -- for windows
   dependencies = {
     "nvim-treesitter/nvim-treesitter",

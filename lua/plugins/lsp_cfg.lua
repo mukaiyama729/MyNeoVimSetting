@@ -52,6 +52,8 @@ return {
     event = "InsertEnter",
   },
 
+  { "mfussenegger/nvim-jdtls" },
+
   -- Mason + LSP: MasonはLSPのパッケージを管理するためのツール
   {
     "williamboman/mason.nvim",
@@ -111,18 +113,10 @@ return {
         end
 
         if lsp_server == "jdtls" then
-          local home = os.getenv("HOME")
-          local project_name = vim.fn.fnamemodify(vim.fn.getcwd(), ":t")
-          local workspace_dir = home .. "/.cache/jdtls/workspace/" .. project_name
-          lspconfig[lsp_server].setup({
-            cmd = { "jdtls" },
-            --cmd = {
-            --  home .. "/.local/share/nvim/mason/bin/jdtls",
-            --  "-data",
-            --  workspace_dir,
-            --},
-            --root_dir = vim.fs.dirname(vim.fs.find({ "gradlew", ".git" }, { upward = true })[1]),
-          })
+          --  local home = os.getenv("HOME")
+          --  local project_name = vim.fn.fnamemodify(vim.fn.getcwd(), ":t")
+          --  local workspace_dir = home .. "/.cache/jdtls/workspace/" .. project_name
+          --  lspconfig[lsp_server].setup({})
           goto continue
         end
 

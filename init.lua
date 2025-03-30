@@ -42,5 +42,5 @@ require("core.options")
 require("core.autocmds")
 require("core.keymaps")
 
-require("user.ui")
-require("original.my-toggle.toggle-comment").setup()
+--require("user.ui")
+--require("original.my-toggle.toggle-comment").setup()

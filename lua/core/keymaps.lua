@@ -95,6 +95,11 @@ end
 vim.api.nvim_set_keymap("n", "<leader>g", "<cmd>lua _lazygit_toggle()<CR>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<leader>h", "<cmd>lua _htop_toggle()<CR>", { noremap = true, silent = true })
 
+-- Buffers
+vim.keymap.set("n", "<leader>bn", ":bnext<CR>", ex_opts("Next buffer"))
+vim.keymap.set("n", "<leader>bp", ":bprevious<CR>", ex_opts("Previous buffer"))
+vim.keymap.set("n", "<leader>bf", ":b#<CR>", ex_opts("Move to current buffer"))
+
 -- インサートモードの括弧の自動補完
 vim.keymap.set("i", "(", "()<Left>")
 vim.keymap.set("i", "[", "[]<Left>")
