@@ -4,7 +4,7 @@ vim.cmd([[
   let g:neo_tree_remove_legacy_commands = 1
   autocmd VimEnter * Neotree left
 ]])
-
+--
 vim.opt.updatetime = 250 -- `CursorHold` の発火時間を短縮（デフォルトは 4000ms）
 vim.api.nvim_create_autocmd("CursorHold", {
   pattern = "*",
@@ -12,32 +12,6 @@ vim.api.nvim_create_autocmd("CursorHold", {
     vim.diagnostic.open_float(nil, { focusable = false, border = "rounded" })
   end,
 })
-
---vim.api.nvim_create_autocmd("BufWritePre", {
---  pattern = { "*.js", "*.ts", "*.tsx", "*.jsx" },
---  callback = function()
---    vim.lsp.buf.format({ async = false })
---  end,
---})
-
--- vim.api.nvim_create_autocmd("BufWritePost", {
---   pattern = { "*.ts", "*.tsx", "*.js", "*.jsx" },
---   callback = function()
---     vim.fn.jobstart("tsc --noEmit", {
---       on_stdout = function(_, data)
---         if data then
---           vim.notify(table.concat(data, "\n"), vim.log.levels.INFO)
---         end
---       end,
---       on_stderr = function(_, data)
---         if data then
---           vim.notify(table.concat(data, "\n"), vim.log.levels.ERROR)
---         end
---       end,
---     })
---   end,
--- })
-
 -- tsc のエラーを保持するための Neovim 診断用ネームスペースを作成
 local tsc_ns = vim.api.nvim_create_namespace("my-tsc-diagnostics")
 

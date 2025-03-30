@@ -42,7 +42,7 @@ return {
       },
     },
   },
-  -- file browser
+  --  -- file browser
   { "nvim-tree/nvim-web-devicons", opts = {} },
   {
     "nvim-neo-tree/neo-tree.nvim",
@@ -74,16 +74,6 @@ return {
           ["<up>"] = "move_cursor_up",
           ["<C-p>"] = "move_cursor_up",
           ["<esc>"] = "close",
-        },
-      }
-      opts.event_handlers = {
-        {
-          event = "file_open_requested",
-          handler = function() end,
-        },
-        {
-          event = "directory_opened",
-          handler = function() end,
         },
       }
       opts.sources = {
