@@ -99,6 +99,8 @@ vim.api.nvim_set_keymap("n", "<leader>h", "<cmd>lua _htop_toggle()<CR>", { norem
 vim.keymap.set("n", "<leader>bn", ":bnext<CR>", ex_opts("Next buffer"))
 vim.keymap.set("n", "<leader>bp", ":bprevious<CR>", ex_opts("Previous buffer"))
 vim.keymap.set("n", "<leader>bf", ":b#<CR>", ex_opts("Move to current buffer"))
+vim.keymap.set("n", "<leader>bw", ":w<CR>:bnext<CR>", ex_opts("Save and move to next buffer"))
+vim.keymap.set("n", "<leader>bs", ":w<CR>:bnext<CR>:bdelete #<CR>")
 
 -- インサートモードの括弧の自動補完
 vim.keymap.set("i", "(", "()<Left>")

@@ -6,7 +6,7 @@ return {
   opts = {
     -- add any opts here
     -- for example
-    provider = "gemini",
+    provider = "openai",
     auto_suggestions_provider = "gemini",
 
     openai = {
