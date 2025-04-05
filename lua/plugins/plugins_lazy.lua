@@ -240,6 +240,21 @@ return {
     "windwp/nvim-autopairs",
     event = "InsertEnter",
     config = true,
+    opts = {
+      fast_wrap = {
+        map = "<C-b>",
+        chars = { "{", "[", "(", '"', "'" },
+        pattern = [=[[%'%"%>%]%)%}%,]]=],
+        end_key = "$",
+        before_key = "h",
+        after_key = "l",
+        cursor_pos_before = true,
+        keys = "qwertyuiopzxcvbnmasdfghjkl",
+        manual_position = true,
+        highlight = "Search",
+        highlight_grey = "Comment",
+      },
+    },
     -- use opts = {} for passing setup options
     -- this is equivalent to setup({}) function
   },
@@ -316,5 +331,15 @@ return {
     version = "*",
     config = true,
     opts = { open_mapping = [[<C-a>]], insert_mapping = true, direction = "float", terminal_mapping = true },
+  },
+  {
+    "kylechui/nvim-surround",
+    version = "^3.0.0", -- Use for stability; omit to use `main` branch for the latest features
+    event = "VeryLazy",
+    config = function()
+      require("nvim-surround").setup({
+        -- Configuration here, or leave empty to use defaults
+      })
+    end,
   },
 }

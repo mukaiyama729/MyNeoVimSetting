@@ -6,7 +6,7 @@ return {
   opts = {
     -- add any opts here
     -- for example
-    provider = "openai",
+    provider = vim.env.PROVIDER,
     auto_suggestions_provider = "gemini",
 
     openai = {
