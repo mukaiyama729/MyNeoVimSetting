@@ -8,7 +8,7 @@ if not status then
   return
 end
 local extendedClientCapabilities = jdtls.extendedClientCapabilities
-
+local capabilities = require("cmp_nvim_lsp").default_capabilities()
 local config = {
   cmd = {
     "java",
@@ -32,6 +32,7 @@ local config = {
     workspace_dir,
   },
   root_dir = require("jdtls.setup").find_root({ ".git", "mvnw", "gradlew", "pom.xml", "build.gradle" }),
+  capabilities = capabilities,
 
   settings = {
     java = {

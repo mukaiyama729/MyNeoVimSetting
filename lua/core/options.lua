@@ -9,6 +9,7 @@ vim.opt.swapfile = false       -- スワップファイルを作成しない
 -- vim.opt.helplang = "ja" -- ヘルプファイルの言語は日本語
 vim.opt.hidden = true          -- バッファを切り替えるときに
 --ファイルを保存しなくてもOKに
+vim.opt.autoread = true
 
 -- カーソルと表示
 -- vim.opt.cursorline = true -- カーソルがある行を強調

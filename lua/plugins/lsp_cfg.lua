@@ -62,6 +62,7 @@ return {
       "neovim/nvim-lspconfig",
       "jay-babu/mason-null-ls.nvim",
       "nvimtools/none-ls.nvim",
+      "hrsh7th/cmp-nvim-lsp",
     },
     event = { "VeryLazy" },
     config = function()
@@ -69,6 +70,7 @@ return {
       require("mason-lspconfig").setup({
         ensure_installed = lsp_servers,
       })
+      local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
       local lspconfig = require("lspconfig")
       for _, lsp_server in ipairs(lsp_servers) do
@@ -77,6 +79,7 @@ return {
             root_dir = function(fname)
               return lspconfig.util.find_git_ancestor(fname) or vim.fn.getcwd()
             end,
+            capabilities = capabilities,
             settings = {
               python = {
                 pythonPath = get_python_path(vim.fn.getcwd()),
@@ -99,6 +102,7 @@ return {
             root_dir = function(fname)
               return lspconfig.util.find_git_ancestor(fname) or vim.fn.getcwd()
             end,
+            capabilities = capabilities,
             filetypes = {
               "javascript",
               "javascriptreact",
@@ -124,6 +128,7 @@ return {
           root_dir = function(fname)
             return lspconfig.util.find_git_ancestor(fname) or vim.fn.getcwd()
           end,
+          capabilities = capabilities,
         })
         ::continue::
       end

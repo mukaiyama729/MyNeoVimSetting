@@ -41,9 +41,15 @@ vim.keymap.set("n", "<leader>hs", duplicate_hsplit, { noremap = true, silent = t
 map("n", "<leader>k", "O<Esc>", opts)
 map("n", "<leader>j", "o<Esc>", opts)
 
--- 定義ジャンプ（新しいウィンドウで開く）
+-- 定義ジャンプ（新しいウィンドウで水平分割で開く）
 vim.keymap.set("n", "gd", function()
   vim.cmd("split") -- 新しい水平分割ウィンドウを作成
+  vim.lsp.buf.definition()
+end, { silent = true, desc = "Jump to definition in new split window" })
+
+-- 定義ジャンプ（新しいウィンドウで垂直分割で開く）
+vim.keymap.set("n", "gv", function()
+  vim.cmd("vsplit") -- 新しい水平分割ウィンドウを作成
   vim.lsp.buf.definition()
 end, { silent = true, desc = "Jump to definition in new split window" })
 
@@ -93,7 +99,7 @@ function _htop_toggle()
 end
 
 vim.api.nvim_set_keymap("n", "<leader>g", "<cmd>lua _lazygit_toggle()<CR>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "<leader>h", "<cmd>lua _htop_toggle()<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<leader>ht", "<cmd>lua _htop_toggle()<CR>", { noremap = true, silent = true })
 
 -- Buffers
 vim.keymap.set("n", "<leader>bn", ":bnext<CR>", ex_opts("Next buffer"))
